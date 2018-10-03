@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
+/// <reference types="@types/googlemaps" />
+import { Component, OnInit, AfterContentInit } from '@angular/core';
 import { ViewChild } from '@angular/core';
-import { } from '@types/googlemaps';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit, AfterContentInit {
   @ViewChild('gmap') gmapElement: any;
-  map: google.maps.Map;
+  public map: google.maps.Map;
 
   latitude: any;
   longitude: any;
@@ -18,7 +18,7 @@ export class AppComponent {
 
   markerTypes = [
     {
-      text: "Parking", value: "parking_lot_maps.png"
+      text: 'Parking', value: 'parking_lot_maps.png'
     }
     // ,
     // {
@@ -29,7 +29,7 @@ export class AppComponent {
     // }
   ];
 
-  selectedMarkerType: string = "parking_lot_maps.png";
+  selectedMarkerType = 'parking_lot_maps.png';
 
   isHidden = false;
 
@@ -38,7 +38,7 @@ export class AppComponent {
   }
 
   ngAfterContentInit() {
-    let mapProp = {
+    const mapProp = {
       center: new google.maps.LatLng(18.5793, 73.8143),
       zoom: 15,
       mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -48,15 +48,15 @@ export class AppComponent {
   }
 
   setMapType(mapTypeId: string) {
-    this.map.setMapTypeId(mapTypeId)
+    this.map.setMapTypeId(mapTypeId);
   }
 
   setCenter() {
     this.map.setCenter(new google.maps.LatLng(this.latitude, this.longitude));
 
-    let location = new google.maps.LatLng(this.latitude, this.longitude);
+    const location = new google.maps.LatLng(this.latitude, this.longitude);
 
-    let marker = new google.maps.Marker({
+    const marker = new google.maps.Marker({
       position: location,
       map: this.map,
       title: 'Got you!'
@@ -82,11 +82,11 @@ export class AppComponent {
 
     this.map.setCenter(new google.maps.LatLng(this.latitude, this.longitude));
 
-    let location = new google.maps.LatLng(this.latitude, this.longitude);
+    const location = new google.maps.LatLng(this.latitude, this.longitude);
 
     console.log(`selected marker: ${this.selectedMarkerType}`);
 
-    let marker = new google.maps.Marker({
+    const marker = new google.maps.Marker({
       position: location,
       map: this.map,
       icon: this.iconBase + this.selectedMarkerType,
